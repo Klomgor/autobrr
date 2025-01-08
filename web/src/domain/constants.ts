@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -451,6 +451,19 @@ export const ListTypeOptions: OptionBasicTyped<ListType>[] = [
     value: "METACRITIC"
   },
 ];
+
+export const ListTypeNameMap: Record<ListType, string> = {
+  "SONARR": "Sonarr",
+  "RADARR": "Radarr",
+  "LIDARR": "Lidarr",
+  "READARR": "Readarr",
+  "WHISPARR": "Whisparr",
+  "MDBLIST": "MDBList",
+  "TRAKT": "Trakt",
+  "METACRITIC": "Metacritic",
+  "STEAM": "Steam",
+  "PLAINTEXT": "Plaintext",
+};
 
 export const NotificationTypeOptions: OptionBasicTyped<NotificationType>[] = [
   {

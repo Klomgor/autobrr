@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021-2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -81,11 +81,7 @@ function ProxySettings() {
   return (
     <Section
       title="Proxies"
-      description={
-        <>
-          Proxies that can be used with Indexers, feeds and IRC.<br/>
-        </>
-      }
+      description="Proxies that can be used with Indexers, feeds and IRC."
       rightSide={
         <button
           type="button"

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package filter
@@ -183,6 +183,10 @@ func (s *service) Store(ctx context.Context, filter *domain.Filter) error {
 	if err := filter.Validate(); err != nil {
 		s.log.Error().Err(err).Msgf("invalid filter: %v", filter)
 		return err
+	}
+
+	if filter.AnnounceTypes == nil || len(filter.AnnounceTypes) == 0 {
+		filter.AnnounceTypes = []string{string(domain.AnnounceTypeNew)}
 	}
 
 	if err := s.repo.Store(ctx, filter); err != nil {

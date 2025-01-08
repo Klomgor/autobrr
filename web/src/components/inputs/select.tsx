@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -510,7 +510,7 @@ export const AgeSelect = ({
         setDuration(value);
       }}>
         {({ open }) => (
-          <>
+          <div>
             <div className="mt-0 relative">
               <ListboxButton className="block w-full relative shadow-sm text-sm text-left rounded-md border pl-3 pr-10 py-2.5 focus:ring-blue-500 dark:focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-500 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-815 dark:text-gray-400">
                 <span className="block truncate text-gray-500 dark:text-white">
@@ -552,7 +552,7 @@ export const AgeSelect = ({
                 </ListboxOptions>
               </Transition>
             </div>
-          </>
+          </div>
         )}
       </Listbox>
     </div>
