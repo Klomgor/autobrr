@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -450,7 +450,25 @@ export const ListTypeOptions: OptionBasicTyped<ListType>[] = [
     label: "Metacritic",
     value: "METACRITIC"
   },
+  {
+    label: "AniList",
+    value: "ANILIST"
+  },
 ];
+
+export const ListTypeNameMap: Record<ListType, string> = {
+  "SONARR": "Sonarr",
+  "RADARR": "Radarr",
+  "LIDARR": "Lidarr",
+  "READARR": "Readarr",
+  "WHISPARR": "Whisparr",
+  "MDBLIST": "MDBList",
+  "TRAKT": "Trakt",
+  "METACRITIC": "Metacritic",
+  "STEAM": "Steam",
+  "PLAINTEXT": "Plaintext",
+  "ANILIST": "AniList",
+};
 
 export const NotificationTypeOptions: OptionBasicTyped<NotificationType>[] = [
   {
@@ -693,5 +711,20 @@ export const ListsMDBListOptions: OptionBasic[] = [
   {
     label: "Latest TV Shows",
     value: "https://mdblist.com/lists/garycrawfordgc/latest-tv-shows/json"
+  },
+];
+
+export const ListsAniListOptions: OptionBasic[] = [
+  {
+    label: "Current anime season",
+    value: "https://api.autobrr.com/lists/anilist/seasonal"
+  },
+  {
+    label: "Trending animes",
+    value: "https://api.autobrr.com/lists/anilist/trending"
+  },
+  {
+    label: "Next anime season",
+    value: "https://api.autobrr.com/lists/anilist/upcoming"
   },
 ];

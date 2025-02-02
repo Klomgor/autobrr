@@ -1,3 +1,6 @@
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 package list
 
 import (
@@ -225,6 +228,9 @@ func (s *service) refreshList(ctx context.Context, listItem *domain.List) error 
 
 	case domain.ListTypePlaintext:
 		err = s.plaintext(ctx, listItem)
+
+	case domain.ListTypeAniList:
+		err = s.anilist(ctx, listItem)
 
 	default:
 		err = errors.Errorf("unsupported list type: %s", listItem.Type)

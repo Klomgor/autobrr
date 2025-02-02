@@ -1,3 +1,6 @@
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 package domain
 
 import (
@@ -34,6 +37,7 @@ const (
 	ListTypePlaintext  ListType = "PLAINTEXT"
 	ListTypeTrakt      ListType = "TRAKT"
 	ListTypeSteam      ListType = "STEAM"
+	ListTypeAniList    ListType = "ANILIST"
 )
 
 type ListRefreshStatus string
@@ -105,7 +109,7 @@ func (l *List) ListTypeArr() bool {
 }
 
 func (l *List) ListTypeList() bool {
-	return l.Type == ListTypeMDBList || l.Type == ListTypeMetacritic || l.Type == ListTypePlaintext || l.Type == ListTypeTrakt || l.Type == ListTypeSteam
+	return l.Type == ListTypeMDBList || l.Type == ListTypeMetacritic || l.Type == ListTypePlaintext || l.Type == ListTypeTrakt || l.Type == ListTypeSteam || l.Type == ListTypeAniList
 }
 
 func (l *List) ShouldProcessItem(monitored bool) bool {

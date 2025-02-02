@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -383,7 +383,7 @@ const routeTree = RootRoute.addChildren([
 export const Router = createRouter({
   routeTree,
   defaultPendingComponent: () => (
-    <div className="flex flex-grow items-center justify-center col-span-9">
+    <div className="flex grow items-center justify-center col-span-9">
       <RingResizeSpinner className="text-blue-500 size-24" />
     </div>
   ),

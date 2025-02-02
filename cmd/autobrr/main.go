@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package main
@@ -27,6 +27,7 @@ import (
 	"github.com/autobrr/autobrr/internal/irc"
 	"github.com/autobrr/autobrr/internal/list"
 	"github.com/autobrr/autobrr/internal/logger"
+	"github.com/autobrr/autobrr/internal/metrics"
 	"github.com/autobrr/autobrr/internal/notification"
 	"github.com/autobrr/autobrr/internal/proxy"
 	"github.com/autobrr/autobrr/internal/release"
@@ -175,6 +176,22 @@ func main() {
 		)
 		errorChannel <- httpServer.Open()
 	}()
+
+	if cfg.Config.MetricsEnabled {
+		metricsManager := metrics.NewMetricsManager(version, commit, date, releaseService, ircService, feedService, listService, filterService)
+
+		go func() {
+			httpMetricsServer := http.NewMetricsServer(
+				log,
+				cfg,
+				version,
+				commit,
+				date,
+				metricsManager,
+			)
+			errorChannel <- httpMetricsServer.Open()
+		}()
+	}
 
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, syscall.SIGHUP, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)

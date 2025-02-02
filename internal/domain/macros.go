@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package domain
@@ -55,6 +55,7 @@ type Macro struct {
 	Leechers                  int
 	LogScore                  int
 	MagnetURI                 string
+	MetaIMDB                  string
 	Origin                    string
 	Other                     []string
 	PreTime                   string
@@ -131,6 +132,7 @@ func NewMacro(release Release) Macro {
 		Leechers:                  release.Leechers,
 		LogScore:                  release.LogScore,
 		MagnetURI:                 release.MagnetURI,
+		MetaIMDB:                  release.MetaIMDB,
 		Origin:                    release.Origin,
 		Other:                     release.Other,
 		PreTime:                   release.PreTime,

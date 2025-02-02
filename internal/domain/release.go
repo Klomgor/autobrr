@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package domain
@@ -10,8 +10,6 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
-	"golang.org/x/text/transform"
-	"golang.org/x/text/unicode/norm"
 	"html"
 	"io"
 	"math"
@@ -33,6 +31,8 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/moistari/rls"
 	"golang.org/x/net/publicsuffix"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/unicode/norm"
 )
 
 type ReleaseRepo interface {
@@ -132,6 +132,7 @@ type Release struct {
 	FilterID                           int                   `json:"-"`
 	Filter                             *Filter               `json:"-"`
 	ActionStatus                       []ReleaseActionStatus `json:"action_status"`
+	MetaIMDB                           string                `json:"-"`
 }
 
 // Hash return md5 hashed normalized release name
@@ -1167,9 +1168,9 @@ func (r *Release) MapVars(def *IndexerDefinition, varMap map[string]string) erro
 		r.Episode = episode
 	}
 
-	//if metaImdb, err := getStringMapValue(varMap, "imdb"); err == nil {
-	//	r.MetaIMDB = metaImdb
-	//}
+	if metaImdb, err := getStringMapValue(varMap, "imdb"); err == nil {
+		r.MetaIMDB = metaImdb
+	}
 
 	return nil
 }
