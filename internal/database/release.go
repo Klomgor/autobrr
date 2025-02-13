@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package database
@@ -367,7 +367,8 @@ func (repo *ReleaseRepo) findReleases(ctx context.Context, tx *Tx, params domain
 		var rls domain.Release
 		var ras domain.ReleaseActionStatus
 
-		var rlsIndexer, rlsIndexerName, rlsIndexerExternalName, rlsFilter, rlsAnnounceType, infoUrl, downloadUrl, subTitle, normalizedHash, codec, hdr, rlsType, audioStr, languageStr, editionStr, cutStr, website sql.NullString
+		var rlsIndexer, rlsIndexerName, rlsIndexerExternalName, rlsFilter, rlsAnnounceType, infoUrl, downloadUrl, subTitle, normalizedHash, codec, hdr, rlsType, audioStr, audioChannels, region, languageStr, editionStr, cutStr, website, mediaProcessing sql.NullString
+		var hybrid sql.NullBool
 
 		var rlsIndexerID sql.NullInt64
 		var rasId, rasFilterId, rasReleaseId, rasActionId sql.NullInt64
@@ -403,17 +404,17 @@ func (repo *ReleaseRepo) findReleases(ctx context.Context, tx *Tx, params domain
 			&rls.Container,
 			&hdr,
 			&audioStr,
-			&rls.AudioChannels,
+			&audioChannels,
 			&rls.Group,
-			&rls.Region,
+			&region,
 			&languageStr,
 			&editionStr,
 			&cutStr,
-			&rls.Hybrid,
+			&hybrid,
 			&rls.Proper,
 			&rls.Repack,
 			&website,
-			&rls.MediaProcessing,
+			&mediaProcessing,
 			&rlsType,
 			&rls.Timestamp,
 			&rasId, &rasStatus, &rasAction, &rasActionId, &rasType, &rasClient, &rasFilter, &rasFilterId, &rasReleaseId, pq.Array(&rasRejections), &rasTimestamp, &resp.TotalCount,
@@ -471,10 +472,14 @@ func (repo *ReleaseRepo) findReleases(ctx context.Context, tx *Tx, params domain
 		rls.Codec = strings.Split(codec.String, ",")
 		rls.HDR = strings.Split(hdr.String, ",")
 		rls.Audio = strings.Split(audioStr.String, ",")
+		rls.AudioChannels = audioChannels.String
 		rls.Language = strings.Split(languageStr.String, ",")
+		rls.Region = region.String
 		rls.Edition = strings.Split(editionStr.String, ",")
 		rls.Cut = strings.Split(cutStr.String, ",")
+		rls.Hybrid = hybrid.Bool
 		rls.Website = website.String
+		rls.MediaProcessing = mediaProcessing.String
 		//rls.Type = rlsType.String
 		if rlsType.Valid {
 			rls.ParseType(rlsType.String)

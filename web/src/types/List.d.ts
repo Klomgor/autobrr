@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -41,4 +41,15 @@ interface ListCreate {
   include_alternate_titles: boolean;
 }
 
-type ListType = "SONARR" | "RADARR" | "LIDARR" | "READARR" | "WHISPARR" | "MDBLIST" | "TRAKT" | "METACRITIC" | "STEAM" | "PLAINTEXT";
+type ListType =
+  | "SONARR"
+  | "RADARR"
+  | "LIDARR"
+  | "READARR"
+  | "WHISPARR"
+  | "MDBLIST"
+  | "TRAKT"
+  | "METACRITIC"
+  | "STEAM"
+  | "PLAINTEXT"
+  | "ANILIST";

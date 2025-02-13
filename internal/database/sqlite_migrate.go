@@ -1,4 +1,4 @@
-// Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+// Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 package database
@@ -1902,7 +1902,7 @@ ALTER TABLE "release"
     ADD cut TEXT;
 
 ALTER TABLE "release"
-    ADD hybrid TEXT;
+    ADD hybrid BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE "release"
     ADD region TEXT;
@@ -1985,12 +1985,16 @@ CREATE INDEX release_cut_index
 CREATE INDEX release_hybrid_index
     ON "release" (hybrid);
 `,
-  `UPDATE irc_channel 
+	`UPDATE irc_channel 
     SET name = '#ptp-announce'
-    WHERE name = '#ptp-announce-dev';
+    WHERE name = '#ptp-announce-dev' AND NOT EXISTS (SELECT 1 FROM irc_channel WHERE name = '#ptp-announce');
 `,
-  `UPDATE irc_network
+	`UPDATE irc_network
   SET invite_command = REPLACE(invite_command, '#ptp-announce-dev', '#ptp-announce')
   WHERE invite_command LIKE '%#ptp-announce-dev%';
+`,
+	`UPDATE filter
+	SET announce_types = '{"NEW"}'
+	WHERE announce_types = '{}';
 `,
 }

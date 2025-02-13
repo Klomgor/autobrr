@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2024, Ludvig Lundgren and the autobrr contributors.
+ * Copyright (c) 2021 - 2025, Ludvig Lundgren and the autobrr contributors.
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -262,10 +262,10 @@ export const APIClient = {
       { body: req }),
     getOIDCConfig: async () => {
       try {
-        return await appClient.Get<{ enabled: boolean; authorizationUrl: string; state: string }>("api/auth/oidc/config");
+        return await appClient.Get<{ enabled: boolean; authorizationUrl: string; state: string; disableBuiltInLogin: boolean }>("api/auth/oidc/config");
       } catch (error: unknown) {
         if (error instanceof Error && error.message?.includes('404')) {
-          return { enabled: false, authorizationUrl: '', state: '' };
+          return { enabled: false, authorizationUrl: '', state: '', disableBuiltInLogin: false };
         }
         throw error;
       }
